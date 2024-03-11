@@ -4,6 +4,7 @@ sampleとしてphi2をベースに、同じphi2を2つマージします
 https://huggingface.co/if001/sample_phi-2
 
 
+マージイメージ
 ![merge](images/merged.png)
 
 
