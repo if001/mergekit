@@ -1,0 +1,8 @@
+base_model: if001/sample_phi-2
+tokenizer: microsoft/phi-2
+gate_mode: cheap_embed
+experts:
+  - source_model: if001/sample_phi-2
+    positive_prompts: ["for model1"]
+  - source_model: if001/sample_phi-2
+    positive_prompts: ["for model2"]

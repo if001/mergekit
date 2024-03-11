@@ -16,6 +16,7 @@
 import logging
 import os
 import sys
+sys.path.append("../mergekit")
 from typing import Dict, List, Optional, Union
 
 import click
@@ -65,7 +66,7 @@ class MistralMOEConfig(BaseModel):
     # "random" is random
     dtype: Optional[str] = None
     experts_per_token: int = 2
-
+    tokenizer: Optional[str] = None
 
 def get_hidden_states(
     model: Union[MistralForCausalLM, LlamaForCausalLM],
@@ -361,9 +362,14 @@ def build(
                 tensor_name, base_loader.get_tensor(tensor_name).to(dtype=out_dtype)
             )
 
-    tokenizer = transformers.AutoTokenizer.from_pretrained(
-        base_model.model.path, revision=base_model.model.revision
-    )
+    if config.tokenizer:
+        tokenizer = transformers.AutoTokenizer.from_pretrained(
+            config.tokenizer, revision=base_model.model.revision, trust_remote_code=True
+        )
+    else:
+        tokenizer = transformers.AutoTokenizer.from_pretrained(
+            base_model.model.path, revision=base_model.model.revision
+        )
     tokenizer.padding_side = "left"
     tokenizer.pad_token_id = tokenizer.bos_token_id
     if tokenizer.pad_token_id is None:
