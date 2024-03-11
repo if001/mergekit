@@ -1,6 +1,11 @@
 # README
-sampleとして以下のモデルをベースに、以下のモデルを2つマージします
+sampleとしてphi2をベースに、同じphi2を2つマージします
+
 https://huggingface.co/if001/sample_phi-2
+
+
+![merge](images/merged.png)
+
 
 ## merge
 
@@ -27,7 +32,9 @@ experts:
 ```
 
 ## load
-python sample_load.py
+`./sample_output`以下にマージされたモデルが出力されるので、以下でロードして確認
+
+`python sample_load.py`
 
 ```
 MixtralForCausalLM(
