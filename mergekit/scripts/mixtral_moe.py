@@ -114,7 +114,7 @@ def tokenize_prompts(
     prompts: List[str], tokenizer: transformers.PreTrainedTokenizerBase
 ):
     return tokenizer(
-        [tokenizer.bos_token or "" + p for p in prompts],
+        [(tokenizer.bos_token or "") + p for p in prompts],
         return_tensors="pt",
         padding=True,
         add_special_tokens=False,
@@ -294,7 +294,7 @@ def build(
         logging.warning(
             f"Your model has {out_cfg.num_local_experts} experts, which is "
             "not a power of two. The model will not be usable in llama.cpp."
-        )
+        )    
 
     loaders: Dict[ModelReference, LazyTensorLoader] = {}
     for model in tqdm.tqdm(
